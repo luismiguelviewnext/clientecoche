@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ClientecocheApplication<clientecoche>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.curso.clientecoche.ClientecocheApplication",
+            "projectName": "clientecoche",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
