@@ -1,58 +1,69 @@
 package com.curso.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "clientes")
 public class Cliente {
-    
-    private int id;
-    private String marca;
-    private String modelo;
-    private String matricula;
+    @Id
+    private int idCliente;
+    private String nombre;
+    private int telefono;
+    private String email;
     
     
     public Cliente() {
         super();
 
+    }
+    public Cliente(int idCliente) {
+        super();
+        this.idCliente = idCliente;
+    }
+    public Cliente(int idCliente, String nombre, int telefono, String email) {
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
+    }
 
+    
+    public Cliente(String nombre, int telefono, String email) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
     }
-    public Cliente(int id) {
-        super();
-        this.id = id;
+    public int getIdCliente() {
+        return idCliente;
     }
-    public Cliente(int id, String marca, String modelo, String matricula) {
-        super();
-        this.id = id;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.matricula = matricula;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
-    public int getId() {
-        return id;
+    public String getNombre() {
+        return nombre;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
-    public String getMarca() {
-        return marca;
+    public int getTelefono() {
+        return telefono;
     }
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
-    public String getModelo() {
-        return modelo;
+    public String getEmail() {
+        return email;
     }
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-    public String getMatricula() {
-        return matricula;
-    }
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
+    public void setEmail(String email) {
+        this.email = email;
     }
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + idCliente;
         return result;
     }
     @Override
@@ -64,20 +75,16 @@ public class Cliente {
         if (getClass() != obj.getClass())
             return false;
         Cliente other = (Cliente) obj;
-        if (id != other.id)
+        if (idCliente != other.idCliente)
             return false;
         return true;
     }
     @Override
     public String toString() {
-        return "Cliente [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", matricula=" + matricula + "]";
+        return "Cliente [idCliente=" + idCliente + ", nombre=" + nombre + ", telefono=" + telefono + ", email=" + email
+                + "]";
     }
-
-    
-
-    
-
-
+   
     
 
     
