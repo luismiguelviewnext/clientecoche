@@ -16,6 +16,8 @@ import com.curso.model.Coche;
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
+    private static final String COCHE_URL = "http://localhost:8080/coche";
+
     /** DAO para operaciones con la entidad Cliente. */
     @Autowired
     ClienteDao clienteDao;
@@ -85,7 +87,7 @@ public class ClienteServiceImpl implements ClienteService {
      */
     public void nuevoCoche(Coche coche) {
 
-        Coche[] coches = restTemplate.getForObject("http://localhost:8080/coche", Coche[].class);
+        Coche[] coches = restTemplate.getForObject(COCHE_URL, Coche[].class);
         boolean cocheExistente = false;
         for (Coche c : coches) {
             if (c.getId() == coche.getId() && c.getMatricula().equals(coche.getMatricula())) {
@@ -99,7 +101,7 @@ public class ClienteServiceImpl implements ClienteService {
                 nuevoCoche.setMarca(coche.getMarca());
                 nuevoCoche.setModelo(coche.getModelo());
 
-                restTemplate.postForLocation("http://localhost:8080/coche", nuevoCoche);
+                restTemplate.postForLocation(COCHE_URL, nuevoCoche);
             }
 
         }
@@ -113,7 +115,7 @@ public class ClienteServiceImpl implements ClienteService {
      */
     public List<Coche> listarcoches() {
 
-        return restTemplate.getForObject("http://localhost:8080/coche", List.class);
+        return restTemplate.getForObject(COCHE_URL, List.class);
     }
 
     /**
@@ -124,7 +126,7 @@ public class ClienteServiceImpl implements ClienteService {
      */
     public Coche obtenerCochePorId(int id) {
 
-        return restTemplate.getForObject("http://localhost:8080/coche/" + id, Coche.class);
+        return restTemplate.getForObject(COCHE_URL + "/" + id, Coche.class);
     }
 
     /**
@@ -136,7 +138,7 @@ public class ClienteServiceImpl implements ClienteService {
      */
     public void actualizarCoche(Coche coche) {
 
-        Coche[] coches = restTemplate.getForObject("http://localhost:8080/coche", Coche[].class);
+        Coche[] coches = restTemplate.getForObject(COCHE_URL, Coche[].class);
         boolean cocheExistente = false;
         for (Coche c : coches) {
             if (c.getId() == coche.getId() && c.getMatricula().equals(coche.getMatricula())) {
@@ -149,7 +151,7 @@ public class ClienteServiceImpl implements ClienteService {
                 nuevoCoche.setMatricula(coche.getMatricula());
                 nuevoCoche.setMarca(coche.getMarca());
                 nuevoCoche.setModelo(coche.getModelo());
-                restTemplate.put("http://localhost:8080/coche", nuevoCoche);
+                restTemplate.put(COCHE_URL, nuevoCoche);
             }
         }
     }
@@ -160,6 +162,6 @@ public class ClienteServiceImpl implements ClienteService {
      * @param id ID del coche a eliminar.
      */
     public void eliminarCoche(int id) {
-        restTemplate.delete("http://localhost:8080/coche/" + id);
+        restTemplate.delete(COCHE_URL + "/" + id);
     }
 }
