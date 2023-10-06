@@ -6,6 +6,7 @@ import jakarta.persistence.Table;
 
 /**
  * Representa a un cliente en el sistema.
+ * 
  * @author Luis Miguel Albarracín Castillo
  */
 @Entity
