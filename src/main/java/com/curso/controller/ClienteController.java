@@ -1,6 +1,7 @@
 /**
  * La clase ClienteController es un controlador REST que maneja operaciones CRUD para las entidades 
  * Cliente y Coche.
+ * @author Luis Miguel Albarracín Castillo
  */
 package com.curso.controller;
 

@@ -11,6 +11,7 @@ import com.curso.model.Coche;
 /**
  * Implementación del servicio ClienteService que gestiona las operaciones CRUD
  * para la entidad Cliente y las peticiones a Coche.
+ * @author Luis Miguel Albarracín Castillo
  */
 @Service
 public class ClienteServiceImpl implements ClienteService {
