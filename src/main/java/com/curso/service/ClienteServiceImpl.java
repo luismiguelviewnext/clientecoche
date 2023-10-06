@@ -1,52 +1,87 @@
 package com.curso.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import com.curso.dao.ClienteDao;
 import com.curso.model.Cliente;
 import com.curso.model.Coche;
 
+/**
+ * Implementación del servicio ClienteService que gestiona las operaciones CRUD
+ * para la entidad Cliente y las peticiones a Coche.
+ */
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
+    /** DAO para operaciones con la entidad Cliente. */
     @Autowired
     ClienteDao clienteDao;
+
+    /** RestTemplate para llamadas a otros servicios o microservicios. */
     @Autowired
     RestTemplate restTemplate;
 
+    /**
+     * Almacena un nuevo cliente en la base de datos.
+     * 
+     * @param cliente Cliente a almacenar.
+     */
     @Override
     public void nuevoCliente(Cliente cliente) {
-       clienteDao.save(cliente);
+        clienteDao.save(cliente);
     }
 
+    /**
+     * Obtiene la lista de todos los clientes almacenados en la base de datos.
+     * 
+     * @return Lista de clientes.
+     */
     @Override
     public List<Cliente> listarclientes() {
-
         return clienteDao.findAll();
-
     }
 
+    /**
+     * Obtiene un cliente específico por su ID.
+     * 
+     * @param id ID del cliente.
+     * @return El cliente con el ID especificado o null si no se encuentra.
+     */
     @Override
     public Cliente obtenerPorId(int id) {
         return clienteDao.findById(id).orElse(null);
     }
+
+    /**
+     * Actualiza la información de un cliente existente en la base de datos.
+     * 
+     * @param cliente Cliente con la información actualizada.
+     */
     @Override
     public void actualizar(Cliente cliente) {
         clienteDao.save(cliente);
     }
 
+    /**
+     * Elimina un cliente específico por su ID de la base de datos.
+     * 
+     * @param id ID del cliente a eliminar.
+     */
     public void eliminar(int id) {
-
         clienteDao.deleteById(id);
     }
 
-
     // -----------------------------------------Metodos para coche------------------------------------------------
 
+    /**
+     * Método para agregar un nuevo coche. Si el coche ya existe (basado en ID y
+     * matrícula),
+     * no se agregará un nuevo coche.
+     * 
+     * @param coche Coche a agregar.
+     */
     public void nuevoCoche(Coche coche) {
 
         Coche[] coches = restTemplate.getForObject("http://localhost:8080/coche", Coche[].class);
@@ -70,25 +105,43 @@ public class ClienteServiceImpl implements ClienteService {
 
     }
 
+    /**
+     * Obtiene una lista de todos los coches.
+     * 
+     * @return Lista de coches.
+     */
     public List<Coche> listarcoches() {
 
         return restTemplate.getForObject("http://localhost:8080/coche", List.class);
     }
 
+    /**
+     * Obtiene un coche específico por su ID.
+     * 
+     * @param id ID del coche.
+     * @return El coche con el ID especificado.
+     */
     public Coche obtenerCochePorId(int id) {
 
         return restTemplate.getForObject("http://localhost:8080/coche/" + id, Coche.class);
     }
 
+    /**
+     * Actualiza la información de un coche existente. Si el coche no existe (basado
+     * en ID y matrícula),
+     * se crea uno nuevo.
+     * 
+     * @param coche Coche con la información actualizada.
+     */
     public void actualizarCoche(Coche coche) {
 
         Coche[] coches = restTemplate.getForObject("http://localhost:8080/coche", Coche[].class);
         boolean cocheExistente = false;
         for (Coche c : coches) {
             if (c.getId() == coche.getId() && c.getMatricula().equals(coche.getMatricula())) {
-                 cocheExistente = true;
+                cocheExistente = true;
             }
-            if(!cocheExistente){
+            if (!cocheExistente) {
 
                 Coche nuevoCoche = new Coche();
                 nuevoCoche.setId(coche.getId());
@@ -100,8 +153,12 @@ public class ClienteServiceImpl implements ClienteService {
         }
     }
 
-    public void eliminarCoche(int id) { 
+    /**
+     * Elimina un coche específico por su ID.
+     * 
+     * @param id ID del coche a eliminar.
+     */
+    public void eliminarCoche(int id) {
         restTemplate.delete("http://localhost:8080/coche/" + id);
     }
-
 }
