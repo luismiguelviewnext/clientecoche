@@ -31,7 +31,7 @@ public class ClienteController {
      *
      * @return Lista de clientes.
      */
-    @GetMapping(value = "ejemplar", produces = MediaType.APPLICATION_JSON_VALUE)     
+    @GetMapping(value = "cliente", produces = MediaType.APPLICATION_JSON_VALUE)     
     public List listarClientes() {
         return ejemplarService.listarclientes();
     }
@@ -42,9 +42,9 @@ public class ClienteController {
      * @param id El ID del cliente.
      * @return El cliente con el ID proporcionado.
      */
-    @GetMapping(value = "ejemplar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)     
-    public Cliente obtenerPorId(@PathVariable("id") int id) {
-        return ejemplarService.obtenerPorId(id);     
+    @GetMapping(value = "cliente/{id}", produces = MediaType.APPLICATION_JSON_VALUE)     
+    public Cliente obtenerPorId(@PathVariable("id") int idCliente) {
+        return ejemplarService.obtenerPorId(idCliente);     
     }
 
     /**
@@ -52,7 +52,7 @@ public class ClienteController {
      *
      * @param cliente El cliente a agregar.
      */
-    @PostMapping(value = "ejemplar", produces = MediaType.APPLICATION_JSON_VALUE)     
+    @PostMapping(value = "cliente", produces = MediaType.APPLICATION_JSON_VALUE)     
     public void nuevoEjemplar(@RequestBody Cliente cliente) {
         ejemplarService.nuevoCliente(cliente);
     }
@@ -62,7 +62,7 @@ public class ClienteController {
      *
      * @param cliente El cliente con la información actualizada.
      */
-    @PutMapping(value = "ejemplar", consumes = MediaType.APPLICATION_JSON_VALUE)     
+    @PutMapping(value = "cliente", consumes = MediaType.APPLICATION_JSON_VALUE)     
     public void actualizar(@RequestBody Cliente cliente) {
         ejemplarService.actualizar(cliente);     
     }
@@ -72,9 +72,9 @@ public class ClienteController {
      *
      * @param id El ID del cliente a eliminar.
      */
-    @DeleteMapping(value = "ejemplar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)     
-    public void eliminar(@PathVariable("id") int id) {
-        ejemplarService.eliminar(id);     
+    @DeleteMapping(value = "cliente/{id}", produces = MediaType.APPLICATION_JSON_VALUE)     
+    public void eliminar(@PathVariable("id") int idCliente) {
+        ejemplarService.eliminar(idCliente);     
     }
 
     //---- Métodos para coches
