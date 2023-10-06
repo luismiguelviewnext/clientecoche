@@ -46,6 +46,7 @@ public interface ClienteService {
      */
     void eliminar(int idCliente);
 
+
     // ----------------------------------------- Métodos para los coches -------------------------------------------
 
     /**

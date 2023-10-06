@@ -10,5 +10,7 @@ import com.curso.model.Cliente;
  * @author Luis Miguel Albarracín Castillo
  */
 public interface ClienteDao extends JpaRepository<Cliente, Integer> {
+
+
     
 }

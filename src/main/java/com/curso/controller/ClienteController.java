@@ -78,6 +78,7 @@ public class ClienteController {
         ejemplarService.eliminar(idCliente);     
     }
 
+
     //---- Métodos para coches
 
     /**
