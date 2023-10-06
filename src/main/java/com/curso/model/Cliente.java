@@ -1,60 +1,111 @@
 package com.curso.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+/**
+ * Representa a un cliente en el sistema.
+ */
+@Entity
+@Table(name = "clientes")
 public class Cliente {
-    
-    private int id;
-    private String marca;
-    private String modelo;
-    private String matricula;
-    
-    
+    @Id
+    private int idCliente;
+    private String nombre;
+    private int telefono;
+    private String email;
+
+    /**
+     * Constructor por defecto.
+     */
     public Cliente() {
         super();
 
+    }
 
-    }
-    public Cliente(int id) {
+    /**
+     * Constructor con el id del cliente.
+     *
+     * @param idCliente el identificador del cliente.
+     */
+    public Cliente(int idCliente) {
         super();
-        this.id = id;
+        this.idCliente = idCliente;
     }
-    public Cliente(int id, String marca, String modelo, String matricula) {
-        super();
-        this.id = id;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.matricula = matricula;
+
+    /**
+     * Constructor completo.
+     *
+     * @param idCliente el identificador del cliente.
+     * @param nombre    el nombre del cliente.
+     * @param telefono  el teléfono del cliente.
+     * @param email     el correo electrónico del cliente.
+     */
+    public Cliente(int idCliente, String nombre, int telefono, String email) {
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
     }
-    public int getId() {
-        return id;
+
+    /**
+     * Constructor sin id.
+     *
+     * @param nombre   el nombre del cliente.
+     * @param telefono el teléfono del cliente.
+     * @param email    el correo electrónico del cliente.
+     */
+    public Cliente(String nombre, int telefono, String email) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
     }
-    public void setId(int id) {
-        this.id = id;
+
+    // Getters y setters
+    public int getIdCliente() {
+        return idCliente;
     }
-    public String getMarca() {
-        return marca;
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
-    public void setMarca(String marca) {
-        this.marca = marca;
+
+    public String getNombre() {
+        return nombre;
     }
-    public String getModelo() {
-        return modelo;
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+
+    public int getTelefono() {
+        return telefono;
     }
-    public String getMatricula() {
-        return matricula;
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
+
+    public String getEmail() {
+        return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + idCliente;
         return result;
     }
+
+    /*
+     * Método equals y hashcode para determinar si dos objetos son iguales.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -64,24 +115,18 @@ public class Cliente {
         if (getClass() != obj.getClass())
             return false;
         Cliente other = (Cliente) obj;
-        if (id != other.id)
+        if (idCliente != other.idCliente)
             return false;
         return true;
     }
+
+    /*
+     * Metodo toString para mostrar los datos del objeto.
+     */
     @Override
     public String toString() {
-        return "Cliente [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", matricula=" + matricula + "]";
+        return "Cliente [idCliente=" + idCliente + ", nombre=" + nombre + ", telefono=" + telefono + ", email=" + email
+                + "]";
     }
 
-    
-
-    
-
-
-    
-
-    
-
-
-    
 }

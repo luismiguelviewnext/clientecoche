@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.curso.dao.ClienteDao;
 import com.curso.model.Cliente;
 import com.curso.model.Coche;
 
@@ -13,70 +14,34 @@ import com.curso.model.Coche;
 public class ClienteServiceImpl implements ClienteService {
 
     @Autowired
+    ClienteDao clienteDao;
+    @Autowired
     RestTemplate restTemplate;
 
     @Override
     public void nuevoCliente(Cliente cliente) {
-        Coche[] coches = restTemplate.getForObject("http://localhost:8080/coche", Coche[].class);
-        boolean cocheExistente = false;
-
-        for (Coche coche : coches) {
-            if (coche.getId() == cliente.getId() && coche.getMatricula().equals(cliente.getMatricula())) {
-                cocheExistente = true;
-            }
-        }
-        if (!cocheExistente) {
-            Coche nuevoCoche = new Coche();
-            nuevoCoche.setId(cliente.getId());
-            nuevoCoche.setMatricula(cliente.getMatricula());
-            nuevoCoche.setMarca(cliente.getMarca());
-            nuevoCoche.setModelo(cliente.getModelo());
-
-            restTemplate.postForLocation("http://localhost:8080/coche", nuevoCoche);
-        }
-
+       clienteDao.save(cliente);
     }
 
     @Override
     public List<Cliente> listarclientes() {
 
-        return restTemplate.getForObject("http://localhost:8080/coche", List.class);
+        return clienteDao.findAll();
 
     }
 
     @Override
     public Cliente obtenerPorId(int id) {
-        return restTemplate.getForObject("http://localhost:8080/coche/" + id, Cliente.class);
+        return clienteDao.findById(id).orElse(null);
     }
-
     @Override
     public void actualizar(Cliente cliente) {
-        Coche[] coches = restTemplate.getForObject("http://localhost:8080/coche", Coche[].class);
-        boolean cocheExistente = false;
-
-        for (Coche coche : coches) {
-            if (coche.getId() == cliente.getId() && coche.getMatricula().equals(cliente.getMatricula())) {
-                cocheExistente = true;
-                break; // Salir del bucle si encontramos el coche que coincide
-            }
-        }
-
-        Coche cocheParaActualizar = new Coche();
-        cocheParaActualizar.setId(cliente.getId());
-        cocheParaActualizar.setMatricula(cliente.getMatricula());
-        cocheParaActualizar.setMarca(cliente.getMarca());
-        cocheParaActualizar.setModelo(cliente.getModelo());
-
-        if (!cocheExistente) {
-            // Si el coche ya existe, actualízalo
-            restTemplate.put("http://localhost:8080/coche", cocheParaActualizar);
-
-        }
+        clienteDao.save(cliente);
     }
 
     public void eliminar(int id) {
 
-        restTemplate.delete("http://localhost:8080/coche/" + id);
+        clienteDao.deleteById(id);
     }
 
 

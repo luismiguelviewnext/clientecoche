@@ -6,6 +6,7 @@ import com.curso.model.Coche;
 
 /**
  * Interfaz para el servicio que maneja las operaciones CRUD para los objetos Cliente y Coche.
+ * @author Luis Miguel Albarracín Castillo
  */
 public interface ClienteService {
 
@@ -29,7 +30,7 @@ public interface ClienteService {
      * @param id El identificador del cliente.
      * @return El cliente con el identificador dado.
      */
-    Cliente obtenerPorId(int id);
+    Cliente obtenerPorId(int idCliente);
 
     /**
      * Actualiza un cliente.
@@ -43,9 +44,9 @@ public interface ClienteService {
      *
      * @param id El identificador del cliente.
      */
-    void eliminar(int id);
+    void eliminar(int idCliente);
 
-    // Métodos para los coches
+    // ----------------------------------------- Métodos para los coches -------------------------------------------
 
     /**
      * Guarda un nuevo coche.
